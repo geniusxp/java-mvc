@@ -8,6 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/app.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,100&display=swap" rel="stylesheet">
 
     <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">GeniusXP</title>
 </head>
@@ -15,13 +20,13 @@
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <img src="https://www.geniusxp.tech/logo.svg" alt="GeniusXP" />
+                <img src="/img/logo.svg" alt="GeniusXP" style="height:3rem;" />
             </a>
 
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a th:href="@{/home}" class="nav-link">Página inicial</a></li>
-                <li class="nav-item"><a th:href="@{/events/list}" class="nav-link">Eventos</a></li>
-                <li class="nav-item"><a th:href="@{/users/list}" class="nav-link">Usuários</a></li>
+            <ul class="nav nav-pills d-flex align-items-center">
+                <li class="nav-item" ><a th:href="@{/home}" class="nav-link">Página inicial</a></li>
+                <li class="nav-item" ><a th:href="@{/events/list}" class="nav-link">Eventos</a></li>
+                <li class="nav-item" ><a th:href="@{/users/list}" class="nav-link">Usuários</a></li>
             </ul>
         </header>
     </div>
@@ -30,5 +35,9 @@
     <footer layout:fragment="footer"></footer>
 
     <script src="/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
