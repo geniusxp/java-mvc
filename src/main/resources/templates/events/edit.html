@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Editar evento</title>
+    </head>
+    <body>
+        <main layout:fragment="content">
+            <h1>Editar evento</h1>
+
+            <form th:action="@{/events/edit}" th:object="${event}" method="post" class="d-grid gap-3">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                </div>
+
+                <input th:field="*{id}" type="hidden"/>
+                <fieldset class="form-group">
+                    <label for="name">Nome do evento</label>
+                    <input th:field="*{name}" id="name" class="form-control" minlength="5" maxlength="255">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="description">Descrição do evento</label>
+                    <textarea  th:field="*{description}" id="description" class="form-control" rows="3"  minlength="5" maxlength="512"></textarea>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="eventType">Segmento do evento</label>
+                    <input th:field="*{eventType}" id="eventType" class="form-control" minlength="5" maxlength="100">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="imageUrl">URL da logo do evento</label>
+                    <input th:field="*{imageUrl}" id="imageUrl" class="form-control" type="url"  minlength="5" maxlength="512">
+                </fieldset>
+
+                <button class="btn primary w-fit">Atualizar evento</button>
+            </form>
+        </main>
+    </body>
+</html>
