@@ -31,14 +31,15 @@
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th>Segmento do evento</th>
-                    <th>Logo do evento</th>
                     <th></th>
                 </tr>
                 <tr th:each="event:${events}">
-                    <td th:text="${event.name}" style="min-width:12rem;"></td>
+                    <td class="text-truncate" style="max-width:12rem;">
+                        <img th:src="${event.imageUrl}" alt="Foto do evento" style="width: 3rem; height: 3rem;" class="rounded-2 pe-1 object-fit-cover" />
+                        <span th:text="${event.name}"></span>
+                    </td>
                     <td th:text="${event.description}"></td>
                     <td th:text="${event.eventType}" style="min-width:12rem;"></td>
-                    <td th:text="${event.imageUrl}" th:title="${event.imageUrl}" class="text-truncate" style="max-width:20rem;"></td>
                     <th>
                         <div class="d-flex gap-2 h-100 justify-content-center">
                             <a th:href="@{/events/edit/}+${event.id}"
