@@ -61,9 +61,9 @@ public class EventController {
         return "redirect:/events/list";
     }
 
-    @PostMapping("remove")
+    @PostMapping("delete")
     @Transactional
-    public String remover(Long id, RedirectAttributes redirectAttributes) {
+    public String deleteEvent(Long id, RedirectAttributes redirectAttributes) {
         eventRepository.deleteById(id);
         redirectAttributes.addFlashAttribute("message", "Evento removido");
         return "redirect:/events/list";
