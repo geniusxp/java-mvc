@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Editar palestrante</title>
+    </head>
+    <body>
+        <main layout:fragment="content">
+            <h1>Editar palestrante</h1>
+
+            <form th:action="@{/speakers/edit}" th:object="${speaker}" method="post" class="d-grid gap-3">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                </div>
+
+                <input th:field="*{id}" type="hidden"/>
+                <fieldset class="form-group">
+                    <label for="name">Nome do palestrante</label>
+                    <input th:field="*{name}" id="name" class="form-control" minlength="5" maxlength="255">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="description">Biografia do palestrante</label>
+                    <textarea  th:field="*{description}" id="description" class="form-control" rows="3"  minlength="5" maxlength="512"></textarea>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="socialMediaUrl">URL de uma rede social do palestrante</label>
+                    <input th:field="*{socialMediaUrl}" id="socialMediaUrl" class="form-control" type="url"  minlength="5" maxlength="512">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="language">Idioma do palestrante</label>
+                    <select th:field="*{language}" id="language" class="form-control">
+                        <option value="PT_BR">Português</option>
+                        <option value="EN_US">Inglês</option>
+                        <option value="ES_ES">Espanhol</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="avatarUrl">URL da foto de perfil do palestrante</label>
+                    <input th:field="*{avatarUrl}" id="avatarUrl" class="form-control" type="url"  minlength="5" maxlength="512">
+                </fieldset>
+
+                <button class="btn btn-primary w-fit">Atualizar palestrante</button>
+            </form>
+        </main>
+    </body>
+</html>
