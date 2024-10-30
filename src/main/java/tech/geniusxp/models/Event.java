@@ -33,4 +33,10 @@ public class Event {
     @NotBlank @Size(min = 10, max = 512)
     @Column(name="url_image", length = 512)
     private String imageUrl;
+
+    @OneToMany(mappedBy = "event")
+    private List<Coupon> coupons;
+
+    @OneToMany(mappedBy = "event")
+    private List<TicketType> ticketTypes;
 }

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name="TBL_GXP_SPEAKER")
 @Data
@@ -37,4 +39,11 @@ public class Speaker {
     @NotBlank @Size(min = 5, max = 512)
     @Column(name="url_avatar", length = 512)
     private String avatarUrl;
+
+    @ManyToOne
+    @JoinColumn(name="id_event")
+    private Event event;
+
+    @OneToMany(mappedBy = "speaker")
+    private List<Lecture> lectures = List.of();
 }
