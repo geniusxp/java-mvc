@@ -37,9 +37,9 @@ public class TicketType {
     @Column(name="nr_sold")
     private int soldQuantity = 0;
 
-    @FutureOrPresent @NotNull
-    @Column(name="dt_finishes_at")
-    private LocalDateTime finishesAt;
+    @FutureOrPresent
+    @Column(name="dt_finished_at")
+    private LocalDateTime finishedAt;
 
     @ManyToOne
     @JoinColumn(name="id_event")

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Lista de tipos de ingresso</title>
+    </head>
+    <body>
+        <main layout:fragment="content">
+            <form class="d-flex w-100 justify-content-between align-items-center mb-4">
+                <div>
+                    <h1>Lista de tipos de ingresso</h1>
+                </div>
+            </form>
+
+            <div class="alert alert-success"
+                 th:if="!${#strings.isEmpty(message)}" th:text="${message}">
+            </div>
+
+            <table class="table">
+                <tr>
+                    <th>Categoria</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Evento</th>
+                    <th>Quantidade utilizada</th>
+                    <th></th>
+                </tr>
+                <tr th:each="ticketType:${ticketTypes}">
+                    <td th:text="${ticketType.category}" style="min-width:12rem;"></td>
+                    <td th:text="${ticketType.description}"></td>
+                    <td th:text="${ticketType.priceValue}"></td>
+                    <td th:text="${ticketType.event.name}" style="min-width:12rem;"></td>
+                    <td th:text="${ticketType.soldQuantity} + '/' + ${ticketType.availableQuantity}"></td>
+                    <th>
+                        <div class="d-flex gap-2 h-100 justify-content-center">
+                            <a th:href="@{/ticketTypes/edit/}+${ticketType.id}"
+                               class="btn btn-outline-primary">Editar</a>
+                            <!-- Button trigger modal -->
+                            <button th:onclick="|ticketTypeId.value = ${ticketType.id}|" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Remover
+                            </button>
+                        </div>
+                    </th>
+                </tr>
+            </table>
+
+<!--            empty table message -->
+            <div th:if="${ticketTypes.isEmpty() && search != null}">
+                <div class="alert alert-info">
+                    Nenhum tipo de ingresso para o filtro informado. <a th:href="@{/ticketTypes/list}">Clique aqui</a> para ver todos os tipos de ingresso.
+                </div>
+            </div>
+
+            <a th:href="@{/ticketTypes/create}">Cadastrar novo tipo de ingresso</a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Deseja realmente excluir o tipo de ingresso?
+                        </div>
+                        <div class="modal-footer">
+                            <form th:action="@{/ticketTypes/delete}" method="post">
+                                <input type="hidden" name="id" id="ticketTypeId"/>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                                <button type="submit" class="btn btn-danger">Sim</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Criar palestra</title>
+    </head>
+    <body>
+        <main layout:fragment="content">
+            <h1>Criar palestra</h1>
+            <div class="alert alert-success" th:if="!${#strings.isEmpty(message)}" th:text="${message}"></div>
+
+            <form th:action="@{/lectures/create}" th:object="${lecture}" method="post" class="d-grid gap-3">
+                <fieldset class="form-group">
+                    <label for="name">Nome da palestra</label>
+                    <input th:field="*{name}" id="name" class="form-control" minlength="5" maxlength="150">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="description">Descrição da palestra</label>
+                    <textarea  th:field="*{description}" id="description" class="form-control" rows="3"  minlength="5" maxlength="512"></textarea>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="date">Data da palestra</label>
+                    <input th:field="*{date}" id="date" class="form-control" type="datetime">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="event">Evento</label>
+                    <select th:field="*{event}" id="event" class="form-control">
+                        <option th:each="event : ${events}" th:value="${event.id}" th:text="${event.name}"></option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="speaker">Palestrante</label>
+                    <select th:field="*{speaker}" id="speaker" class="form-control">
+                        <option th:each="speaker : ${speakers}" th:value="${speaker.id}" th:text="${speaker.name}"></option>
+                    </select>
+                </fieldset>
+
+                <button class="btn btn-primary w-fit">Cadastrar palestra</button>
+            </form>
+        </main>
+    </body>
+</html>

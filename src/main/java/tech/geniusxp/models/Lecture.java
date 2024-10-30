@@ -35,4 +35,8 @@ public class Lecture {
     @ManyToOne
     @JoinColumn(name = "id_speaker")
     private Speaker speaker;
+
+    @ManyToOne
+    @JoinColumn(name = "id_event")
+    private Event event;
 }

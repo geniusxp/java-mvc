@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Editar tipo de ingresso</title>
+    </head>
+    <body>
+        <main layout:fragment="content">
+            <h1>Editar tipo de ingresso</h1>
+
+            <form th:action="@{/ticketTypes/edit}" th:object="${ticketType}" method="post" class="d-grid gap-3">
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                </div>
+
+                <input th:field="*{id}" type="hidden"/>
+                <fieldset class="form-group">
+                    <label for="priceValue">Valor do ingresso</label>
+                    <input th:field="*{priceValue}" id="priceValue" class="form-control" type="number" min="0" step="0.01">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="category">Categoria</label>
+                    <input th:field="*{category}" id="category" class="form-control" minlength="5" maxlength="150">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="description">Descrição do tipo de ingresso</label>
+                    <textarea th:field="*{description}" id="description" class="form-control" rows="3"  minlength="5" maxlength="512"></textarea>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="availableQuantity">Quantidade disponível</label>
+                    <input th:field="*{availableQuantity}" id="availableQuantity" class="form-control" type="number" min="1">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="event">Evento</label>
+                    <input readonly th:field="*{event.name}" class="form-control">
+                    <input type="hidden" th:field="*{event.id}" id="event" class="form-control">
+                </fieldset>
+
+                <button class="btn btn-primary w-fit">Atualizar tipo de ingresso</button>
+            </form>
+        </main>
+    </body>
+</html>
