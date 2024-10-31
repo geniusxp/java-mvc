@@ -13,6 +13,8 @@ import tech.geniusxp.repositories.EventRepository;
 import tech.geniusxp.repositories.SpeakerRepository;
 import jakarta.validation.Valid;
 
+import java.time.format.DateTimeFormatter;
+
 @Controller
 @RequestMapping("lectures")
 public class LectureController {
@@ -53,12 +55,20 @@ public class LectureController {
 
     @GetMapping("edit/{id}")
     public String editLectureView(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("lecture", lectureRepository.findById(id));
+        Lecture lecture = lectureRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid lecture Id:" + id));
+        model.addAttribute("lecture", lecture);
         model.addAttribute("events", eventRepository.findAll());
         model.addAttribute("speakers", speakerRepository.findAll());
 
+        // Formatar a data para o formato esperado pelo input datetime-local
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        model.addAttribute("formattedDate", lecture.getDate().format(formatter));
+
         return "lectures/edit";
     }
+
+
 
 
     @PostMapping("edit")

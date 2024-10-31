@@ -35,23 +35,23 @@
                     <th>Palestrante</th>
                     <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
                 </tr>
-                <tr th:each="lecture:${lectures}">
+                <tr th:each="lecture : ${lectures}">
                     <td th:text="${lecture.name}"></td>
                     <td th:text="${lecture.description}"></td>
-                    <td th:text="${#dates.format(lecture.date, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${#temporals.format(lecture.date, 'dd/MM/yyyy HH:mm')}"></td>
                     <td th:text="${lecture.event.name}"></td>
                     <td th:text="${lecture.speaker.name}"></td>
                     <th sec:authorize="hasRole('ROLE_ADMIN')">
                         <div class="d-flex gap-2 h-100 justify-content-center">
-                            <a th:href="@{/lectures/edit/}+${lecture.id}"
-                               class="btn btn-outline-primary">Editar</a>
-                            <!-- Button trigger modal -->
+                            <a th:href="@{/lectures/edit/}+${lecture.id}" class="btn btn-outline-primary">Editar</a>
                             <button th:onclick="|lectureId.value = ${lecture.id}|" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Remover
                             </button>
                         </div>
                     </th>
                 </tr>
+
+
             </table>
 
 <!--            empty table message -->
