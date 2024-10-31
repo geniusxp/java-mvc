@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" data-bs-theme="dark" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5">
 <head>
     <meta charset="UTF-8">
 
@@ -23,7 +23,7 @@
                 <img src="/img/logo.svg" alt="GeniusXP" style="height:3rem;" />
             </a>
 
-            <ul class="nav nav-pills d-flex align-items-center">
+            <ul class="nav nav-pills d-flex align-items-center" sec:authorize="isAuthenticated()">
                 <li class="nav-item" ><a th:href="@{/home}" class="nav-link">Página inicial</a></li>
                 <li class="nav-item" ><a th:href="@{/events/list}" class="nav-link">Eventos</a></li>
                 <li class="nav-item" ><a th:href="@{/coupons/list}" class="nav-link">Cupons</a></li>
@@ -31,6 +31,12 @@
                 <li class="nav-item" ><a th:href="@{/lectures/list}" class="nav-link">Palestras</a></li>
                 <li class="nav-item" ><a th:href="@{/speakers/list}" class="nav-link">Palestrantes</a></li>
                 <li class="nav-item" ><a th:href="@{/users/list}" class="nav-link">Usuários</a></li>
+
+                <li class="nav-item">
+                    <form th:action="@{/auth/logout}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-primary">Logout</button>
+                    </form>
+                </li>
             </ul>
         </header>
     </div>

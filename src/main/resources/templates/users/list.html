@@ -5,17 +5,17 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Lista de palestrantes</title>
+        <title>Lista de usuários</title>
     </head>
     <body>
         <main layout:fragment="content">
             <form class="d-flex w-100 justify-content-between align-items-center mb-4">
                 <div>
-                    <h1>Lista de palestrantes</h1>
+                    <h1>Lista de usuários</h1>
                     <p th:if="${search != null}" class="opacity-75">Pesquisando por "<span th:text="${search}"></span>"</p>
                 </div>
                 <div class="d-flex align-items-center gap-1">
-                    <input type="search" class="form-control" placeholder="Pesquisar nome do palestrante..." style="max-width: 24rem;" name="search" th:value="${search}"/>
+                    <input type="search" class="form-control" placeholder="Pesquisar nome do usuário..." style="max-width: 24rem;" name="search" th:value="${search}"/>
                     <button class="btn btn-primary" title="Pesquisar">
                         <i data-lucide="search" style="width: 1rem;"></i>
                     </button>
@@ -29,40 +29,33 @@
             <table class="table">
                 <tr>
                     <th>Nome</th>
-                    <th>Biografia</th>
-                    <th>Rede social</th>
-                    <th>Idioma</th>
                     <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
                 </tr>
-                <tr th:each="speaker:${speakers}">
+                <tr th:each="user:${users}">
                     <td class="text-truncate" style="max-width:20rem;">
-                        <img th:src="${speaker.avatarUrl}" alt="Foto do palestrante" style="width: 3rem; height: 3rem;" class="rounded-5 pe-1"/>
-                        <span th:text="${speaker.name}"></span>
+                        <img th:src="${user.avatarUrl}" alt="Foto do usuário" style="width: 3rem; height: 3rem;" class="rounded-5 pe-1"/>
+                        <span th:text="${user.name}"></span>
                     </td>
-                    <td th:text="${speaker.description}"></td>
-                    <td style="max-width:20rem;" class="text-truncate">
-                        <a th:text="${speaker.socialMediaUrl}" th:href="${speaker.socialMediaUrl}" target="_blank" rel="noopener noreferrer"></a>
-                    </td>
-                    <td th:text="${speaker.language}"></td>
                     <th sec:authorize="hasRole('ROLE_ADMIN')">
                         <div class="d-flex gap-2 h-100 justify-content-center">
-                            <a th:href="@{/speakers/edit/}+${speaker.id}"
+                            <a th:href="@{/users/edit/}+${user.id}"
                                class="btn btn-outline-primary">Editar</a>
                             <!-- Button trigger modal -->
-                            <button th:onclick="|speakerId.value = ${speaker.id}|" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button th:onclick="|userId.value = ${user.id}|" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Remover
                             </button>
                         </div>
                     </th>
             </table>
 
-            <div th:if="${speakers.isEmpty() && search != null}">
+<!--            empty table message -->
+            <div th:if="${users.isEmpty() && search != null}">
                 <div class="alert alert-info">
-                    Nenhum palestrante para o filtro informado. <a th:href="@{/speakers/list}">Clique aqui</a> para ver todos os palestrantes.
+                    Nenhum usuário para o filtro informado. <a th:href="@{/users/list}">Clique aqui</a> para ver todos os usuários.
                 </div>
             </div>
 
-            <a th:href="@{/speakers/create}" sec:authorize="hasRole('ROLE_ADMIN')">Cadastrar novo palestrante</a>
+            <a th:href="@{/users/create}" sec:authorize="hasRole('ROLE_ADMIN')">Cadastrar novo usuário</a>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -73,11 +66,11 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Deseja realmente excluir o palestrante?
+                            Deseja realmente excluir o usuário?
                         </div>
                         <div class="modal-footer">
-                            <form th:action="@{/speakers/delete}" method="post">
-                                <input type="hidden" name="id" id="speakerId"/>
+                            <form th:action="@{/users/delete}" method="post">
+                                <input type="hidden" name="id" id="userId"/>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
                                 <button type="submit" class="btn btn-danger">Sim</button>
                             </form>

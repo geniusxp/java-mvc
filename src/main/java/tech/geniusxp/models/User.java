@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name="TBL_GXP_USER")
@@ -34,12 +35,12 @@ public class User {
     @Column(name="ds_password", nullable = false)
     private String password;
 
-    @NotBlank @Size(min = 11, max = 11)
-    @Column(name="nr_cpf", nullable = false, length = 11)
+    @Size(min = 11, max = 11)
+    @Column(name="nr_cpf", length = 11)
     private String cpf;
 
-    @Past @NotBlank
-    @Column(name="dt_birth", nullable = false)
+    @Past
+    @Column(name="dt_birth")
     private LocalDate birthDate;
 
     @Column(name="url_avatar")
@@ -50,4 +51,12 @@ public class User {
 
     @Column(name="tx_interests", length = 500)
     private String interests;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "users_roles",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
 }

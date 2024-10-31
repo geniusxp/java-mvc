@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5" layout:decorate="~{layout}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport"
@@ -31,7 +31,7 @@
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th>Segmento do evento</th>
-                    <th></th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
                 </tr>
                 <tr th:each="event:${events}">
                     <td class="text-truncate" style="max-width:12rem;">
@@ -40,7 +40,7 @@
                     </td>
                     <td th:text="${event.description}"></td>
                     <td th:text="${event.eventType}" style="min-width:12rem;"></td>
-                    <th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">
                         <div class="d-flex gap-2 h-100 justify-content-center">
                             <a th:href="@{/events/edit/}+${event.id}"
                                class="btn btn-outline-primary">Editar</a>
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <a th:href="@{/events/create}">Cadastrar novo evento</a>
+            <a th:href="@{/events/create}" sec:authorize="hasRole('ROLE_ADMIN')">Cadastrar novo evento</a>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

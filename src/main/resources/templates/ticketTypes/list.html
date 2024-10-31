@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity5" layout:decorate="~{layout}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport"
@@ -26,7 +26,7 @@
                     <th>Preço</th>
                     <th>Evento</th>
                     <th>Quantidade utilizada</th>
-                    <th></th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')"></th>
                 </tr>
                 <tr th:each="ticketType:${ticketTypes}">
                     <td th:text="${ticketType.category}" style="min-width:12rem;"></td>
@@ -34,7 +34,7 @@
                     <td th:text="${ticketType.priceValue}"></td>
                     <td th:text="${ticketType.event.name}" style="min-width:12rem;"></td>
                     <td th:text="${ticketType.soldQuantity} + '/' + ${ticketType.availableQuantity}"></td>
-                    <th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">
                         <div class="d-flex gap-2 h-100 justify-content-center">
                             <a th:href="@{/ticketTypes/edit/}+${ticketType.id}"
                                class="btn btn-outline-primary">Editar</a>
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <a th:href="@{/ticketTypes/create}">Cadastrar novo tipo de ingresso</a>
+            <a th:href="@{/ticketTypes/create}" sec:authorize="hasRole('ROLE_ADMIN')">Cadastrar novo tipo de ingresso</a>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
