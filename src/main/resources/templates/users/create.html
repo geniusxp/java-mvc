@@ -48,8 +48,8 @@
                 <fieldset class="form-group">
                     <label for="role">Cargos:</label><br>
                     <div th:each="role : ${roles}">
-                    <input type="checkbox" th:field="*{roles}" th:value="${role.name}" id="role">
-                    <label th:text="${role.label}"></label><br>
+                        <label th:text="${role.label}"></label><br>
+                        <input type="checkbox" th:field="*{roles}" th:value="${role.name}" id="role">
                     </div>
                 </fieldset>
 

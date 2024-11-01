@@ -3,6 +3,7 @@ package tech.geniusxp.controllers;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,9 +20,11 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("list")
-    public String getUserListView(@RequestParam(value = "search", required = false) String searchTerm, Model model) {
+    public String getUserListView(@RequestParam(value = "roles", required = false) String searchTerm, Model model) {
         if (searchTerm != null) {
             model.addAttribute("users", userRepository.findByNameContainingIgnoreCase(searchTerm));
             model.addAttribute("search", searchTerm);
