@@ -21,7 +21,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/css/**", "/img/**", "/", "/auth/**").permitAll()
+                        .requestMatchers("/css/**", "/img/**", "/js/**", "/", "/auth/**", "/home").permitAll()
                         .requestMatchers("/users/**", "/events/**", "/coupons/**", "/ticketTypes/**", "/lectures/**", "/speakers/**").hasRole("ADMIN") // Restringe o acesso para ADMIN
                         .requestMatchers("/users/list", "/events/list", "/coupons/list", "/ticketTypes/list", "/lectures/list", "/speakers/list").hasRole("USER") // Restringe o acesso para USER
                         .anyRequest().authenticated()
