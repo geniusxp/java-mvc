@@ -21,7 +21,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/public/**", "/auth/**", "/css/**", "/img/**", "/", "/login").permitAll()
+                        .requestMatchers("/css/**", "/img/**", "/", "/auth/**").permitAll()
                         .requestMatchers("/users/**", "/events/**", "/coupons/**", "/ticketTypes/**", "/lectures/**", "/speakers/**").hasRole("ADMIN") // Restringe o acesso para ADMIN
                         .requestMatchers("/users/list", "/events/list", "/coupons/list", "/ticketTypes/list", "/lectures/list", "/speakers/list").hasRole("USER") // Restringe o acesso para USER
                         .anyRequest().authenticated()
@@ -29,12 +29,10 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/auth/login") // Página de login personalizada
                         .defaultSuccessUrl("/") // Página de redirecionamento após sucesso no login
-                        .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/auth/logout")
-                        .logoutSuccessUrl("/auth/login") // Redirecionamento após logout
-                        .permitAll()
+                        .logoutSuccessUrl("/auth/login?logout") // Redirecionamento após logout
                 );
         return http.build();
     }
@@ -51,6 +49,4 @@ public class SecurityConfig {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-
-
 }

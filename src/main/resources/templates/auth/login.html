@@ -11,18 +11,25 @@
 
         <main layout:fragment="content">
             <h1>Login</h1>
+            <div class="alert alert-danger" th:if="${param.error}">
+                Não foi possível realizar o login. Verifique as credenciais e tente novamente.
+            </div>
+
+            <div class="alert success" th:if="${param.logout}">
+                Logout realizado com sucesso.
+            </div>
 
             <form th:action="@{/auth/login}" method="post" class="d-grid gap-3">
                 <fieldset class="form-group">
                     <label for="username">E-mail</label>
-                    <input id="username" class="form-control" type="email" minlength="5" maxlength="320">
+                    <input name="username" id="username" class="form-control" type="email" minlength="5" maxlength="320">
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="password">Senha</label>
-                    <input id="password" class="form-control" type="password" minlength="5" maxlength="255">
+                    <input name="password" id="password" class="form-control" type="password" minlength="5" maxlength="255">
                 </fieldset>
 				
-                <button class="btn btn-primary w-fit">Login</button>
+                <button class="btn btn-primary w-fit" type="submit">Login</button>
 			</form>
         </main>
     </body>
