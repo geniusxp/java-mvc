@@ -33,7 +33,7 @@
                 </tr>
                 <tr th:each="user:${users}">
                     <td class="text-truncate" style="max-width:20rem;">
-                        <img th:src="${user.avatarUrl}" alt="Foto do usuário" style="width: 3rem; height: 3rem;" class="rounded-5 pe-1"/>
+                        <img th:src="${user.avatarUrl} ?: 'https://api.dicebear.com/9.x/initials/svg?seed=' + ${user.name}" alt="Foto do usuário" style="width: 3rem; height: 3rem;" class="rounded-5 me-1"/>
                         <span th:text="${user.name}"></span>
                     </td>
                     <th sec:authorize="hasRole('ROLE_ADMIN')">
