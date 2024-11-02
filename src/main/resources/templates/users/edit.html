@@ -11,7 +11,7 @@
         <main layout:fragment="content">
             <h1>Editar usuário</h1>
 
-            <form th:action="@{/user/edit}" th:object="${user}" method="post" class="d-grid gap-3">
+            <form th:action="@{/users/edit}" th:object="${user}" method="post" class="d-grid gap-3">
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
                     <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
                 </div>
@@ -50,10 +50,10 @@
                     <input th:field="*{interests}" id="interests" class="form-control" type="text" minlength="5" maxlength="500">
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="role">Cargos:</label><br>
-                    <div th:each="role : ${roles}">
-                        <input type="checkbox" th:field="*{roles}" th:value="${role.name}" id="role">
-                        <label th:text="${role.label}"></label><br>
+                    <label>Cargos:</label><br>
+                    <div th:each="role : ${roles}" class="d-flex align-items-center">
+                        <input type="checkbox" th:value="${role.id}" th:field="*{roles}" class="me-1" th:id="${role.id}">
+                        <label th:for="${role.id}" th:text="${role.label}"></label><br>
                     </div>
                 </fieldset>
 

@@ -46,10 +46,10 @@
                     <input th:field="*{interests}" id="interests" class="form-control" type="text" minlength="5" maxlength="500">
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="role">Cargos:</label><br>
-                    <div th:each="role : ${roles}">
-                        <label th:text="${role.label}"></label><br>
-                        <input type="checkbox" th:field="*{roles}" th:value="${role.name}" id="role">
+                    <label>Cargos:</label><br>
+                    <div th:each="role : ${roles}" class="d-flex align-items-center">
+                        <input type="checkbox" th:value="${role.id}" th:field="*{roles}" class="me-1" th:id="${role.id}">
+                        <label th:for="${role.id}" th:text="${role.label}"></label><br>
                     </div>
                 </fieldset>
 
