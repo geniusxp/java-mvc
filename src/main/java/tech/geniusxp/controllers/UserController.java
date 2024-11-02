@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tech.geniusxp.models.User;
 import tech.geniusxp.repositories.RoleRepository;
 import tech.geniusxp.repositories.UserRepository;
+import tech.geniusxp.services.UserService;
 
 @Controller
 @RequestMapping("users")
@@ -22,6 +23,8 @@ public class UserController {
     private RoleRepository roleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("list")
     public String getUserListView(@RequestParam(value = "roles", required = false) String searchTerm, Model model) {
@@ -71,7 +74,9 @@ public class UserController {
     @PostMapping("create")
     @Transactional
     public String createUserAction(User user, Model model) {
-        userRepository.save(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.saveUser(user);
+
         model.addAttribute("message", "Usuário cadastrado!");
 
         return "redirect:/users/list";

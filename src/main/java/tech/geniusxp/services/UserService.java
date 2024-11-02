@@ -5,14 +5,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import tech.geniusxp.models.Role;
 import tech.geniusxp.models.User;
-import tech.geniusxp.repositories.RoleRepository;
 import tech.geniusxp.repositories.UserRepository;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,23 +17,8 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private RoleRepository roleRepository;
 
-    public void saveUser(String username, String password, List<String> roles) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-
-        HashSet<Role> userRoles = new HashSet<>();
-        for (String roleName : roles) {
-            Role role = roleRepository.findByName(roleName);
-            if (role != null) {
-                userRoles.add(role);
-            }
-        }
-
-        user.setRoles(userRoles);
+    public void saveUser(User user) {
         userRepository.save(user);
     }
 
