@@ -55,21 +55,12 @@ public class LectureController {
 
     @GetMapping("edit/{id}")
     public String editLectureView(@PathVariable("id") Long id, Model model) {
-        Lecture lecture = lectureRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid lecture Id:" + id));
-        model.addAttribute("lecture", lecture);
+        model.addAttribute("lecture", lectureRepository.findById(id));
         model.addAttribute("events", eventRepository.findAll());
         model.addAttribute("speakers", speakerRepository.findAll());
 
-        // Formatar a data para o formato esperado pelo input datetime-local
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        model.addAttribute("formattedDate", lecture.getDate().format(formatter));
-
         return "lectures/edit";
     }
-
-
-
 
     @PostMapping("edit")
     public String editLectureAction(@Valid Lecture lecture, BindingResult result, RedirectAttributes redirectAttributes, Model model){
