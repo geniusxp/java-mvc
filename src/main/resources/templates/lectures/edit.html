@@ -26,14 +26,16 @@
                     <textarea  th:field="*{description}" id="description" class="form-control" rows="3"  minlength="5" maxlength="512"></textarea>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="event">Evento</label>
-                    <select th:field="*{event}" id="event" class="form-control">
+                    <label>Evento</label>
+                    <select th:field="*{event.id}" class="form-control">
+                        <option value="" disabled>Selecione um evento</option>
                         <option th:each="event : ${events}" th:value="${event.id}" th:text="${event.name}"></option>
                     </select>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="speaker">Palestrante</label>
-                    <select th:field="*{speaker}" id="speaker" class="form-control">
+                    <label>Palestrante</label>
+                    <select th:field="*{speaker.id}" class="form-control">
+                        <option value="" disabled>Selecione um palestrante</option>
                         <option th:each="speaker : ${speakers}" th:value="${speaker.id}" th:text="${speaker.name}"></option>
                     </select>
                 </fieldset>

@@ -34,11 +34,12 @@
                     <input th:field="*{discountValue}" id="discountValue" class="form-control" type="number" min="0" max="100">
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="event">Evento</label>
-                    <input readonly th:field="*{event.name}" class="form-control">
-                    <input type="hidden" th:field="*{event.id}" id="event" class="form-control">
+                    <label>Evento</label>
+                    <select th:field="*{event.id}" class="form-control">
+                        <option value="" disabled>Selecione um evento</option>
+                        <option th:each="event : ${events}" th:value="${event.id}" th:text="${event.name}"></option>
+                    </select>
                 </fieldset>
-
 
                 <button class="btn btn-primary w-fit">Atualizar cupom</button>
             </form>

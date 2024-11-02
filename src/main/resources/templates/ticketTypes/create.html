@@ -32,6 +32,7 @@
                 <fieldset class="form-group">
                     <label for="event">Evento</label>
                     <select th:field="*{event}" id="event" class="form-control">
+                        <option value="" disabled>Selecione um evento</option>
                         <option th:each="event : ${events}" th:value="${event.id}" th:text="${event.name}"></option>
                     </select>
                 </fieldset>
