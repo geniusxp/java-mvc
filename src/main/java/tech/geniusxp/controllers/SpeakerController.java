@@ -37,7 +37,7 @@ public class SpeakerController {
 
     @PostMapping("create")
     @Transactional
-    public String createSpeakerAction(Speaker speaker, Model model) {
+    public String createSpeakerAction(@Valid Speaker speaker, Model model) {
         speakerRepository.save(speaker);
         model.addAttribute("message", "Palestrante cadastrado!");
 

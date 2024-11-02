@@ -40,7 +40,7 @@ public class CouponController {
 
     @PostMapping("create")
     @Transactional
-    public String createCouponAction(Coupon coupon, Model model) {
+    public String createCouponAction(@Valid Coupon coupon, Model model) {
         couponRepository.save(coupon);
         model.addAttribute("message", "Cupom cadastrado!");
 

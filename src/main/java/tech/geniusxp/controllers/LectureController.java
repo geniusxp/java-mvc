@@ -46,7 +46,7 @@ public class LectureController {
 
     @PostMapping("create")
     @Transactional
-    public String createLectureAction(Lecture lecture, Model model) {
+    public String createLectureAction(@Valid Lecture lecture, Model model) {
         lectureRepository.save(lecture);
         model.addAttribute("message", "Palestra cadastrada!");
 

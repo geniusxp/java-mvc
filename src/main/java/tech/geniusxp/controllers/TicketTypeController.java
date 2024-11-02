@@ -34,7 +34,7 @@ public class TicketTypeController {
 
     @PostMapping("create")
     @Transactional
-    public String createTicketTypeAction(TicketType ticketType, Model model) {
+    public String createTicketTypeAction(@Valid TicketType ticketType, Model model) {
         ticketTypeRepository.save(ticketType);
         model.addAttribute("message", "Tipo de ingresso cadastrado!");
 

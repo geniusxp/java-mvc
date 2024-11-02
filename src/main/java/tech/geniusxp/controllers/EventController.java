@@ -36,7 +36,7 @@ public class EventController {
 
     @PostMapping("create")
     @Transactional
-    public String createEventAction(Event event, Model model) {
+    public String createEventAction(@Valid Event event, Model model) {
         eventRepository.save(event);
         model.addAttribute("message", "Evento cadastrado!");
 

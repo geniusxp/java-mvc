@@ -73,7 +73,7 @@ public class UserController {
 
     @PostMapping("create")
     @Transactional
-    public String createUserAction(User user, Model model) {
+    public String createUserAction(@Valid User user, Model model) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
 
