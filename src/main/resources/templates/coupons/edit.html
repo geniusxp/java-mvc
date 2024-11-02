@@ -34,10 +34,6 @@
                     <input th:field="*{discountValue}" id="discountValue" class="form-control" type="number" min="0" max="100">
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="expirationDate">Data de expiração do cupom</label>
-                    <input th:field="*{expirationDate}" id="expirationDate" class="form-control" type="date">
-                </fieldset>
-                <fieldset class="form-group">
                     <label for="event">Evento</label>
                     <input readonly th:field="*{event.name}" class="form-control">
                     <input type="hidden" th:field="*{event.id}" id="event" class="form-control">

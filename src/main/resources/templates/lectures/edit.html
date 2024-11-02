@@ -26,12 +26,6 @@
                     <textarea  th:field="*{description}" id="description" class="form-control" rows="3"  minlength="5" maxlength="512"></textarea>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="date">Data da palestra</label>
-                    <input th:field="*{date}" id="date" class="form-control" type="datetime-local"
-                           th:value="${#temporals.format(lecture.date, 'yyyy-MM-dd\'T\'HH:mm')}">
-                </fieldset>
-
-                <fieldset class="form-group">
                     <label for="event">Evento</label>
                     <select th:field="*{event}" id="event" class="form-control">
                         <option th:each="event : ${events}" th:value="${event.id}" th:text="${event.name}"></option>
