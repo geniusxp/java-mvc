@@ -2,9 +2,11 @@
 ![](.github/banner.png)
 
 ## Integrantes
-- Erick Nathan Capito Pereira (RM99565)
-- Lucas Araujo Oliveira Silva (RM550841)
-- Marina de Souza Cucco (RM551569)
+- RM99565 - Erick Nathan Capito Pereira
+- RM550841 - Lucas Araujo Oliveira Silva
+- RM99409 - Michael José Bernardi Da Silva
+- RM99577 - Guilherme Dias Gomes
+- RM550889 - Hemily Nara da Silva
 
 ## Descrição
 GeniusXP é uma plataforma centralizada para gestão de eventos que simplifica operações como inscrições, pagamentos e check-in, enquanto aumenta o engajamento com enquetes e networking. A inteligência artificial da GeniusXP utiliza as preferências dos usuários para oferecer uma experiência altamente personalizada e otimizar o planejamento. Com análise de sentimento e assistência virtual, a plataforma proporciona interações mais significativas, elevando a eficiência da gestão e tornando os eventos mais impactantes para cada participante.
